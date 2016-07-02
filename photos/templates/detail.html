@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}사진 보기{% endblock %}
+
+{% block body %}
+    <p> {{ photo.title }} </p>
+    <p> {{ photo.content }} </p>
+    <div> {{ photo.description }} </div>
+
+    <p> {{ photo.created_at }} </p>
+    <p> {{ photo.updated_at }} </p>
+
+    {% if photo.image %}
+        <p><img src="{{ photo.image.url }}" /> </p>
+    {% endif %}
+
+
+
+    <h3>댓글</h3>
+    {% for comment in comments %}
+        <div> {{ comment.content }} </div>
+        <form method="POST" action="{% url 'photos:delete_comment' pk=photo.pk %}">
+            {% csrf_token %}
+            <input type="hidden" name="comment_id" value="{{ comment.pk }}"> <br>
+            <button type="submit">댓글삭제</button>
+        </form>
+    {% endfor %}
+
+    <P><a href="{% url 'photos:delete_photo' pk=photo.pk%}">사진 삭제</a></P>
+    <P><a href="{% url 'photos:list_photo' %}">사진 목록</a></P>
+
+    <form method="POST" action="{% url 'photos:create_comment' pk=photo.pk %}">
+        {% csrf_token %}
+        <p>
+            <textarea name="comment"></textarea>
+        </p>
+        <button type="submit">저장</button>
+    </form>
+
+{% endblock %}
+

@@ -25,6 +25,10 @@ SECRET_KEY = 's9m6r^tz6$)xycq$ycdctc3^s)*%%l@9kkw6!6zo#_9=dzefs%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = '/photos/'
+
 ALLOWED_HOSTS = []
 
 
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'photos',
+    'bootstrap3',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,7 +61,9 @@ ROOT_URLCONF = 'pystagram.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'mytemplates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

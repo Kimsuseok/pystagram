@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% load bootstrap3 %}
+
+{% block page_title %}게시물 목록{% endblock %}
+
+{% block body %}
+    <h1>게시물 목록</h1>
+
+    {% for photo in photos %}
+        <p><a href="{% url 'photos:view_photo' pk=photo.pk %}">{{ post.title }}</a></p>
+
+        {{ photo.title }}
+        <!-- post에 값이 없는 경우 아래의 empty가 실행된다. -->
+        {% empty %}
+        <p>게시물이 없습니다.</p>
+
+    {% endfor %}
+
+{% bootstrap_pagination photos %}
+
+{% comment %}
+    {% if photos.has_previous %}
+        <a href="?page={{ photos.previous_page_number }}">이전</a>
+    {% endif %}
+
+    {{ photos.number }} / {{ photos.paginator.num_pages}}
+
+    {% if photos.has_next %}
+        <a href="?page={{ photos.next_page_number }}">다음</a>
+    {% endif %}
+{% endcomment %}
+
+    <p>
+        <a href="{% url 'photos:create_photo' %}">새 글 쓰기</a>
+    </p>
+
+{% endblock %}

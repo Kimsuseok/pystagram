@@ -1,0 +1,41 @@
+{% load bootstrap3 %}
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- JQuery는 bootstrap의 JS 위에 넣자. bootstrap이 사용하는JS가 JQuery다. -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<!-- 실제 경로는 statics 폴더 아래에 있지만 settings.py 에 STATIC_URL = '/static/' 로 지정을 해줬기 때문에 static으로 접근함. -->
+<!-- <script type="text/javascript" src="/static/hello.js"></script> -->
+
+<!-- 위와 같이 static 이라는 경로조차 하드코딩하지 않도록 할수있다. 이렇게 하면 settings.py에서 static url을 변경하면 전체 설정을 한번에 바꿀 수 있다. -->
+<script type="text/javascript" src="{% static 'hello.js' %}"></script>
+
+<!--
+Django용 bootstrap3를 설치하면 위의 CDN 입력 없이 아래와 같이 할 수 있다.
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+-->
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> {% block page_title %}디폴트 타이틀{% endblock %}</title>
+</head>
+<body class="container">
+    <p>{{ request.just_say }}</p>
+
+    {% block body %}
+    {% endblock %}
+
+</body>
+</html>
